@@ -11,8 +11,16 @@
 
 //============================== Space for class or struct =============================
 
-class queue{
-  
+class queue {
+  public:
+    
+    void IncLevel() { //function aims to increase the level of the process after some time
+
+    } 
+    
+    void DecLevel() { //function aims to decrese the level of the process after some time
+
+    }
 };
 
 //============================== Space for int main function ==========================
