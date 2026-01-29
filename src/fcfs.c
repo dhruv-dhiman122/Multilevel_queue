@@ -69,7 +69,9 @@ int main(int argc, char* argv[]) {
     process[i].burst_time = temp_Burst;
   }
   //section for calling the function
-  
+  Sort(process, number);
+
+  fcfsAlgorithm(process, number);
   
   free(process);
   process = NULL;
