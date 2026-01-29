@@ -49,6 +49,13 @@ void fcfsAlgorithm(struct Process process[], int number) {
   }
 }
 
+void display(struct Process process[], int number) {
+  for(int i = 0; i < number; i++) {
+    printf("The wait time for the process %d is %.2f\n", i+1, process[i].wait_time);
+    printf("The turnaround time for process %d is %.2f\n",i+1, process[i].turnaround_time);
+  }
+}
+
 //==================== Space for main function ========================
 int main(int argc, char* argv[]) {
   
@@ -73,6 +80,7 @@ int main(int argc, char* argv[]) {
 
   fcfsAlgorithm(process, number);
   
+  display(process, number);
   free(process);
   process = NULL;
   exit(EXT_SUCCESS);
