@@ -26,17 +26,23 @@ struct Process {
 
 
 //==================== Space for main function ========================
-int main(int argv, char* argc) {
+int main(int argc, char* argv[]) {
   
   if(argv < 2) { // if there was a less number for making the process
     fprintf(stderr, "There must be at a number give for making the process\n");
     exit(EXT_FAILURE);
   }
-  int number = argc[2];
+  int number = atoi(argv[1]);
   struct Process* process = (struct Process*)malloc(number*sizeof(struct Process));
   //asking for the details
+  float temp_Arrival, temp_Burst;
   for(int i = 0; i < number; i++) {
-
+    printf("Enter the process %d arrival time",i+1);
+    scanf("%f",&temp_Arrival);
+    process[i].arrival_time = temp_Arrival;
+    printf("Enter the process %d burst time",i+1);
+    scanf("%f",&temp_Burst);
+    process[i].burst_time = temp_Burst;
   }
 
   
