@@ -14,6 +14,7 @@ struct Process {
   float burst_time;
   float turnaround_time;
   float wait_time;
+  float completion_time;
 };
 
 //==================== Space for macro ===========================
@@ -24,6 +25,29 @@ struct Process {
 
 //==================== Space for user made function ===================
 
+void Sort(struct Process process[], int number) {
+  for(int i = 0; i < number; i++) {
+    for(int j = 0; j < number - i -1; j++) {
+      if(process[j].arrival_time < process[j+1].arrival_time) {
+        float temp = process[j+1];
+        process[j+1] = process[i];
+        process[j] = temp;
+      }
+    }
+  }
+}
+
+void fcfsAlgorithm(struct Process process[], int number) {
+  int current = 0;
+  for(int i = 0; i < number; i++) {
+    if(current < process[i].arrival_time) {
+      current = process[i].arrival_time;
+    }
+      process[i].completion_time = process[i].current + process[i].burst_time;
+      process[i].turnaround_time = process[i].completion_time - process[i].arrival_time;
+      process[i].wait_time = process[i].turnaround_time - process[i].burst_time;
+  }
+}
 
 //==================== Space for main function ========================
 int main(int argc, char* argv[]) {
@@ -44,7 +68,8 @@ int main(int argc, char* argv[]) {
     scanf("%f",&temp_Burst);
     process[i].burst_time = temp_Burst;
   }
-
+  //section for calling the function
+  
   
   free(process);
   process = NULL;
