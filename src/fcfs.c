@@ -29,9 +29,9 @@ void Sort(struct Process process[], int number) {
   for(int i = 0; i < number; i++) {
     for(int j = 0; j < number - i -1; j++) {
       if(process[j].arrival_time < process[j+1].arrival_time) {
-        float temp = process[j+1];
-        process[j+1] = process[i];
-        process[j] = temp;
+        float temp = process[j+1].arrival_time;
+        process[j+1].arrival_time = process[i].arrival_time;
+        process[j].arrival_time = temp;
       }
     }
   }
@@ -43,7 +43,7 @@ void fcfsAlgorithm(struct Process process[], int number) {
     if(current < process[i].arrival_time) {
       current = process[i].arrival_time;
     }
-      process[i].completion_time = process[i].current + process[i].burst_time;
+      process[i].completion_time = current + process[i].burst_time;
       process[i].turnaround_time = process[i].completion_time - process[i].arrival_time;
       process[i].wait_time = process[i].turnaround_time - process[i].burst_time;
   }
