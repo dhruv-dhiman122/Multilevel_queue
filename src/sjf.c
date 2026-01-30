@@ -11,7 +11,7 @@
 //======================= space for struct or union ==============================
 
 struct Process {
-  long long id;
+  int id;
   float burst_time;
   float arrival_time;
   float completion_time;
@@ -33,22 +33,52 @@ void Sort(struct Process process[], int number) {
   }
 }
 
-void sjfAlgorithm(struct Process process[], int number) {
-	int current_time = 0;
-	for(int i = 0; i < number; i++) {
-		if(current_time < process[i].arrival_time) {
-			current_time = process[i].arrival_time;
-		}
-		process[i].completion_time = current_time + process[i].burst_time;
-		process[i].turnaround_time = process[i].completion_time - process[i].arrival_time;
-		process[i].wait_time = process[i].turnaround_time - process[i].burst_time;
-	}
+void sjfAlgorithm(struct Process* process, int n) { 
+    int completed = 0;
+    float current_time = 0;
+    int isCompleted[n];
+
+    for(int i = 0; i < n; i++) {
+        isCompleted[i] = 0;
+    }
+
+    while(completed < n) {
+        int idx = -1;
+        float minBurst = 1e9;
+
+        for(int i = 0; i < n; i++) {
+            if(process[i].arrival_time <= current_time && !isCompleted[i]) {
+                if(process[i].burst_time < minBurst) {
+                    minBurst = process[i].burst_time;
+                    idx = i;
+                }
+            }
+        }
+
+        if(idx != -1) {
+            float startTime = (current_time > process[idx].arrival_time) ? current_time : process[idx].arrival_time;
+            
+            process[idx].completion_time = startTime + process[idx].burst_time;
+            process[idx].turnaround_time = process[idx].completion_time - process[idx].arrival_time;
+            process[idx].wait_time = process[idx].turnaround_time - process[idx].burst_time;
+            current_time = process[idx].completion_time;
+
+            isCompleted[idx] = 1;
+            completed++;
+
+            printf("process = %d, Arrival Time = %.2f, Brust time = %.2f, start = %.2f, completion time = %.2f, turn around time = %.2f, waiting time = %.2f\n", process[idx].id, process[idx].arrival_time, process[idx].burst_time, startTime, process[idx].completion_time,
+                    process[idx].turnaround_time, process[idx].wait_time);
+        }
+        else {
+            current_time++;
+        }
+    }
 }
 
-void diplay(struct Process process[], int number) {
+void display_result(struct Process process[], int number) {
 	for(int i = 0; i < number; i++) {
-		printf("The process %d's  arrival time is %.2f\n",i+1, process[i].arrival_time);
-		printf("The process %d's burst time is %.2f\n", i+1, process[i].burst_time);
+		printf("The process %d's  wait time is %.2f\n",i+1, process[i].wait_time);
+		printf("The process %d's turn around time is %.2f\n", i+1, process[i].turnaround_time);
 	}
 }
 
@@ -60,7 +90,7 @@ int main(int argc, char* argv[]) {
     exit(EXT_FAILURE);
   }
    
-  int number = (int)argv[2];
+  int number = atoi(argv[1]);
   struct Process* process = (struct Process*)malloc(number * sizeof(struct Process));
   for(int i = 0; i < number; i++) {
     printf("Enter the %d process's arrival time\n",i+1);
@@ -68,7 +98,14 @@ int main(int argc, char* argv[]) {
     printf("Enter the %d process's burst time\n",i+1);
     scanf("%f",&process[i].burst_time);
   }
+  
+  //section for calling the function
+  Sort(process, number);
 
+  sjfAlgorithm(process, number);
+
+  display_result(process, number);
+  
   free(process);
   exit(EXT_SUCCESS);
 }
