@@ -34,8 +34,17 @@ void Sort(struct Process process[], int number) {
 }
 
 void sjfAlgorithm(struct Process process[], int number) {
-	
+	int current_time = 0;
+	for(int i = 0; i < number; i++) {
+		if(current_time < process[i].arrival_time) {
+			current_time = process[i].arrival_time;
+		}
+		process[i].completion_time = current_time + process[i].burst_time;
+		process[i].turnaround_time = process[i].completion_time - process[i].arrival_time;
+		process[i].wait_time = process[i].turnaround_time - process[i].burst_time;
+	}
 }
+
 
 //============================ Space for only main function =======================//
 int main(int argc, char* argv[]) {
