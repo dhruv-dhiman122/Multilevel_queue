@@ -8,23 +8,7 @@
 #define EXT_SUCCESS 0
 #define EXT_FAILURE 1
 
-//======================== Sapce for user defined function ==========================/
-
-void Sort(Struct Process process[], int number) {
-  for(int i = 0; i < number; i++) {
-    for(int j = 0; j <number-i-1; j++) {
-      if(process[j].burst_time > process[j+1].burst_time) {
-        float temp = process[j+1].burst_time;
-        process[j].burst_time = temp;
-        process[j+1].burst_time = process[j];
-      }
-    }
-  }
-}
-
-
-
-//========================= Space for struct ===============================//
+//======================= space for struct or union ==============================
 
 struct Process {
   long long id;
@@ -34,6 +18,24 @@ struct Process {
   float wait_time;
   float turnaround_time;
 };
+
+//======================== Sapce for user defined function ==========================/
+
+void Sort(struct Process process[], int number) {
+  for(int i = 0; i < number; i++) {
+    for(int j = 0; j <number-i-1; j++) {
+      if(process[j].burst_time > process[j+1].burst_time) {
+        float temp = process[j+1].burst_time;
+        process[j].burst_time = temp;
+        process[j+1].burst_time = process[j].burst_time;
+      }
+    }
+  }
+}
+
+void sjfAlgorithm(struct Process process[], int number) {
+	
+}
 
 //============================ Space for only main function =======================//
 int main(int argc, char* argv[]) {
