@@ -45,6 +45,12 @@ void sjfAlgorithm(struct Process process[], int number) {
 	}
 }
 
+void diplay(struct Process process[], int number) {
+	for(int i = 0; i < number; i++) {
+		printf("The process %d's  arrival time is %.2f\n",i+1, process[i].arrival_time);
+		printf("The process %d's burst time is %.2f\n", i+1, process[i].burst_time);
+	}
+}
 
 //============================ Space for only main function =======================//
 int main(int argc, char* argv[]) {
