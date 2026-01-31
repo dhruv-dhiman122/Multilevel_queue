@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "shared_variable.h"
 
 //============================= space for macro or union =====================
 

@@ -9,6 +9,8 @@
 #define EXT_SUCCESS 0
 #define EXT_FAILURE 1
 
+int queue_status;
+
 //============================== Space for class or struct =============================
 
 class queue {
