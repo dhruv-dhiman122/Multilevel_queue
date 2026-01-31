@@ -17,6 +17,8 @@ struct Process {
   float completion_time;
 };
 
+int fcfs_number;
+
 //==================== Space for macro ===========================
 
 #define EXT_SUCCESS 0
@@ -63,11 +65,11 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "There must be at a number give for making the process\n");
     exit(EXT_FAILURE);
   }
-  int number = atoi(argv[1]);
-  struct Process* process = (struct Process*)malloc(number*sizeof(struct Process));
+  fcfs_number = atoi(argv[1]);
+  struct Process* process = (struct Process*)malloc(fcfs_number*sizeof(struct Process));
   //asking for the details
   float temp_Arrival, temp_Burst;
-  for(int i = 0; i < number; i++) {
+  for(int i = 0; i < fcfs_number; i++) {
     printf("Enter the process %d arrival time",i+1);
     scanf("%f",&temp_Arrival);
     process[i].arrival_time = temp_Arrival;
@@ -76,11 +78,11 @@ int main(int argc, char* argv[]) {
     process[i].burst_time = temp_Burst;
   }
   //section for calling the function
-  Sort(process, number);
+  Sort(process, fcfs_number);
 
-  fcfsAlgorithm(process, number);
+  fcfsAlgorithm(process, fcfs_number);
   
-  display(process, number);
+  display(process, fcfs_number);
   free(process);
   process = NULL;
   exit(EXT_SUCCESS);
