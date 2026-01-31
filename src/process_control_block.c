@@ -11,6 +11,9 @@
 #define EXT_SUCCESS 0
 #define EXT_FAILURE 1
 
+extern int sjf_program_counter;
+extern int fcfs_program_counter;
+
 //============================== space for function made by the user ========================
 
 
