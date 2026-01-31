@@ -19,6 +19,8 @@ struct Process {
   float turnaround_time;
 };
 
+int sjf_number;
+
 //======================== Sapce for user defined function ==========================/
 
 void Sort(struct Process process[], int number) {
@@ -90,9 +92,9 @@ int main(int argc, char* argv[]) {
     exit(EXT_FAILURE);
   }
    
-  int number = atoi(argv[1]);
-  struct Process* process = (struct Process*)malloc(number * sizeof(struct Process));
-  for(int i = 0; i < number; i++) {
+  sjf_number = atoi(argv[1]);
+  struct Process* process = (struct Process*)malloc(sjf_number * sizeof(struct Process));
+  for(int i = 0; i < sjf_number; i++) {
     printf("Enter the %d process's arrival time\n",i+1);
     scanf("%f",&process[i].arrival_time);
     printf("Enter the %d process's burst time\n",i+1);
@@ -100,11 +102,11 @@ int main(int argc, char* argv[]) {
   }
   
   //section for calling the function
-  Sort(process, number);
+  Sort(process, sjf_number);
 
-  sjfAlgorithm(process, number);
+  sjfAlgorithm(process, sjf_number);
 
-  display_result(process, number);
+  display_result(process, sjf_number);
   
   free(process);
   exit(EXT_SUCCESS);
