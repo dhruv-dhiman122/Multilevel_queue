@@ -55,6 +55,9 @@ void sjfAlgorithm(PCB process[], int n) {
             process[idx].completion_time = startTime + process[idx].burst_time;
             process[idx].turnaround_time = process[idx].completion_time - process[idx].arrival_time;
             process[idx].wait_time = process[idx].turnaround_time - process[idx].burst_time;
+	
+	    update_process_counter(&process[idx], sjf_program_counter);
+
             current_time = process[idx].completion_time;
 
             isCompleted[idx] = 1;
