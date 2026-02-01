@@ -1,10 +1,16 @@
 #ifndef PROCESS_CONTROL_BLOCK_H
 #define PROCESS_CONTROL_BLOCK_H
 
+typedef enum {
+	Process_FCFS,
+	Process_SJF
+} ProcessType;
+
 typedef struct {
 	int process_id;
 	int program_counter;
 	int priority;
+	ProcessType process_type;
 	float arrival_time;
 	float burst_time;
 	float completion_time;
