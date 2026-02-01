@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "process_control_block.h"
 
 //====================== Space for macro ===========================//
 
@@ -10,20 +11,11 @@
 
 //======================= space for struct or union ==============================
 
-struct Process {
-  int id;
-  float burst_time;
-  float arrival_time;
-  float completion_time;
-  float wait_time;
-  float turnaround_time;
-};
-
 int sjf_program_counter;
 
 //======================== Sapce for user defined function ==========================/
 
-void Sort(struct Process process[], int number) {
+void Sort(PCB process[], int number) {
   for(int i = 0; i < number; i++) {
     for(int j = 0; j <number-i-1; j++) {
       if(process[j].burst_time > process[j+1].burst_time) {
@@ -35,7 +27,7 @@ void Sort(struct Process process[], int number) {
   }
 }
 
-void sjfAlgorithm(struct Process* process, int n) { 
+void sjfAlgorithm(PCB process[], int n) { 
     int completed = 0;
     float current_time = 0;
     int isCompleted[n];
@@ -68,7 +60,7 @@ void sjfAlgorithm(struct Process* process, int n) {
             isCompleted[idx] = 1;
             completed++;
 
-            printf("process = %d, Arrival Time = %.2f, Brust time = %.2f, start = %.2f, completion time = %.2f, turn around time = %.2f, waiting time = %.2f\n", process[idx].id, process[idx].arrival_time, process[idx].burst_time, startTime, process[idx].completion_time,
+            printf("process = %d, Arrival Time = %.2f, Brust time = %.2f, start = %.2f, completion time = %.2f, turn around time = %.2f, waiting time = %.2f\n", process[idx].process_id, process[idx].arrival_time, process[idx].burst_time, startTime, process[idx].completion_time,
                     process[idx].turnaround_time, process[idx].wait_time);
         }
         else {
@@ -77,7 +69,7 @@ void sjfAlgorithm(struct Process* process, int n) {
     }
 }
 
-void display_result(struct Process process[], int number) {
+void display_result(PCB process[], int number) {
 	for(int i = 0; i < number; i++) {
 		printf("The process %d's  wait time is %.2f\n",i+1, process[i].wait_time);
 		printf("The process %d's turn around time is %.2f\n", i+1, process[i].turnaround_time);
@@ -93,7 +85,7 @@ int main(int argc, char* argv[]) {
   }
    
   sjf_program_counter = atoi(argv[1]);
-  struct Process* process = (struct Process*)malloc(sjf_program_counter * sizeof(struct Process));
+  PCB* process = (PCB*)malloc(sjf_program_counter * sizeof(PCB));
   for(int i = 0; i < sjf_program_counter; i++) {
     printf("Enter the %d process's arrival time\n",i+1);
     scanf("%f",&process[i].arrival_time);
