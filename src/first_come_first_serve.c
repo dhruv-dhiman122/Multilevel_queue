@@ -39,6 +39,9 @@ void fcfsAlgorithm(PCB process[], int number) {
       process[i].completion_time = current + process[i].burst_time;
       process[i].turnaround_time = process[i].completion_time - process[i].arrival_time;
       process[i].wait_time = process[i].turnaround_time - process[i].burst_time;
+      update_process_counter(&process[i], fcfs_program_counter);
+      fcfs_program_counter++;
+      current = process[i].completion_time;
   }
 }
 
@@ -67,6 +70,7 @@ int main(int argc, char* argv[]) {
     printf("Enter the process %d burst time",i+1);
     scanf("%f",&temp_Burst);
     process[i].burst_time = temp_Burst;
+    create_process(process[i].process_id, 0, process[i].arrival_time, process[i].burst_time);
   }
   //section for calling the function
   Sort(process, fcfs_program_counter);
