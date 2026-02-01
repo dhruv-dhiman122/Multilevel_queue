@@ -2,7 +2,7 @@
 #define PROCESS_CONTROL_BLOCK_H
 
 typedef struct {
-	int porcess_id;
+	int process_id;
 	int program_counter;
 	int priority;
 	float arrival_time;
