@@ -5,20 +5,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "process_control_block.h"
 
 //==================== Space for user made variable ======================
 
-struct Process {
-  long long pid;
-  float arrival_time;
-  float burst_time;
-  float turnaround_time;
-  float wait_time;
-  float completion_time;
-};
-
 int fcfs_program_counter;
-
 //==================== Space for macro ===========================
 
 #define EXT_SUCCESS 0
@@ -27,7 +18,7 @@ int fcfs_program_counter;
 
 //==================== Space for user made function ===================
 
-void Sort(struct Process process[], int number) {
+void Sort(PCB process[], int number) {
   for(int i = 0; i < number; i++) {
     for(int j = 0; j < number - i -1; j++) {
       if(process[j].arrival_time < process[j+1].arrival_time) {
@@ -39,7 +30,7 @@ void Sort(struct Process process[], int number) {
   }
 }
 
-void fcfsAlgorithm(struct Process process[], int number) {
+void fcfsAlgorithm(PCB process[], int number) {
   int current = 0;
   for(int i = 0; i < number; i++) {
     if(current < process[i].arrival_time) {
@@ -51,7 +42,7 @@ void fcfsAlgorithm(struct Process process[], int number) {
   }
 }
 
-void display(struct Process process[], int number) {
+void display(PCB process[], int number) {
   for(int i = 0; i < number; i++) {
     printf("The wait time for the process %d is %.2f\n", i+1, process[i].wait_time);
     printf("The turnaround time for process %d is %.2f\n",i+1, process[i].turnaround_time);
@@ -66,7 +57,7 @@ int main(int argc, char* argv[]) {
     exit(EXT_FAILURE);
   }
   fcfs_program_counter = atoi(argv[1]);
-  struct Process* process = (struct Process*)malloc(fcfs_program_counter*sizeof(struct Process));
+  PCB* process = (PCB*)malloc(fcfs_program_counter*sizeof(PCB));
   //asking for the details
   float temp_Arrival, temp_Burst;
   for(int i = 0; i < fcfs_program_counter; i++) {
