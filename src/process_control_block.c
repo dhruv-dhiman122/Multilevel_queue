@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "shared_variable.h"
 #include "process_control_block.h"
+#include "process_counter.h"
 
 //============================= space for macro or union =====================
 
@@ -15,9 +16,17 @@
 
 //============================== space for function made by the user ========================
 
+void totalProcess() {
+  if(process_counter.total_process > 0) {
+    printf("The total number of process are %d\n",process_counter.total_process);
+  }
+  else {
+    printf("The total numbre of process are 0\n");
+  }
+}
 
 //=========================== space only for main function =========================
 int main() {
-
+  totalProcess();
 	exit(EXT_SUCCESS);
 }
