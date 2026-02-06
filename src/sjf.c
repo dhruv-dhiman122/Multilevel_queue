@@ -11,7 +11,7 @@
 
 //======================= space for struct or union ==============================
 
-int sjf_program_counter;
+int sjf_process_counter;
 
 //======================== Sapce for user defined function ==========================/
 
@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
     exit(EXT_FAILURE);
   }
    
-  sjf_program_counter = atoi(argv[1]);
+  sjf_process_counter = atoi(argv[1]);
   PCB* process = (PCB*)malloc(sjf_program_counter * sizeof(PCB));
   for(int i = 0; i < sjf_program_counter; i++) {
     printf("Enter the %d process's arrival time\n",i+1);
