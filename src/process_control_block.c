@@ -27,6 +27,8 @@ void totalProcess() {
 
 //=========================== space only for main function =========================
 int main() {
+
+  //function for the printing the total number of process
   totalProcess();
 	exit(EXT_SUCCESS);
 }
