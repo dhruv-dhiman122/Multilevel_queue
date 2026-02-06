@@ -11,14 +11,24 @@
 #define EXT_SUCCESS 0
 #define EXT_FAILURE 1
 
+//================================ space for shared varaible to be used in process_control_block =======================
+
+struct ProcessCounter {
+  int sjf_process;
+  int fcfs_process;
+  int total_process;
+};
+
+struct ProcessCounter process_counter;
+
 //============================= Space for user defined function ================
 
-void sjf_process() {
-
+void sjfProcess() {
+  process_counter.sjf_process = sjf_process_counter;
 }
 
-void fcfs_process() {
-
+void fcfsProcess() {
+  process_counter.fcfs_process = sjf_process_counter;
 }
 
 void totalProcess() {
