@@ -9,7 +9,8 @@
 
 //==================== Space for user made variable ======================
 
-int fcfs_program_counter;
+int fcfs_process_counter;
+
 //==================== Space for macro ===========================
 
 #define EXT_SUCCESS 0
@@ -59,7 +60,7 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "There must be at a number give for making the process\n");
     exit(EXT_FAILURE);
   }
-  fcfs_program_counter = atoi(argv[1]);
+  fcfs_process_counter = atoi(argv[1]);
   PCB* process = (PCB*)malloc(fcfs_program_counter*sizeof(PCB));
   //asking for the details
   float temp_Arrival, temp_Burst;
