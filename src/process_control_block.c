@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shared_variable.h"
+#include "process_control_block.h"
 
 //============================= space for macro or union =====================
 
