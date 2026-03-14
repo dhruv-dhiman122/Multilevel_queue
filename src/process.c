@@ -31,13 +31,15 @@ int main() {
   if(process_type == 1) {
     //excute the fcfs file
     fcfs_type_process = user_process_number; // giving the process.h's variable the number of process
+    //system(fcfs_process.c);
   } 
   else if (process_type == 2){
     //execute the sjf file
     sjf_type_process = user_process_number; // giving the process.h's variable the number of process
+    //system(sjf_process.c);
   }
   else {
     printf("No process selected\n");
   }
-  return 0;
+  exit(EXT_SUCCESS);
 }
