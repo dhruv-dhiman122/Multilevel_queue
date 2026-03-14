@@ -21,12 +21,23 @@
 
 // =========================== space for main function only ================================
 int main() {
+  //asking the user for number of process and its type
   printf("Enter the number of process you want to create\n");
   int user_process_number;
   scanf("%d",&user_process_number);
   printf("Enter the type of process you want to make; 1 for FCFS type and 2 for SJF\n");
   int process_type;
   scanf("%d",&process_type);
-
+  if(process_type == 1) {
+    //excute the fcfs file
+    fcfs_type_process = user_process_number; // giving the process.h's variable the number of process
+  } 
+  else if (process_type == 2){
+    //execute the sjf file
+    sjf_type_process = user_process_number; // giving the process.h's variable the number of process
+  }
+  else {
+    printf("No process selected\n");
+  }
   return 0;
 }
