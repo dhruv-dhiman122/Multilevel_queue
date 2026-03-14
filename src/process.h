@@ -16,6 +16,7 @@ typedef struct PROCESS {
   float arrival_time;
   float burst_time;
   ProcessType user_define_process;
+  float wait_time;
 } Process;
 
 #endif
