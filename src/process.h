@@ -19,4 +19,8 @@ typedef struct PROCESS {
   float wait_time;
 } Process;
 
+extern const int total_process;
+extern const int fcfs_type_process;
+extern const int sjf_type_process;
+
 #endif
